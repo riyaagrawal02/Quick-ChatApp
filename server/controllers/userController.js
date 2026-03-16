@@ -9,7 +9,6 @@ export const signup = async(req,res)=>{
     try{
         if(!fullName || !email || !password || !bio){
             return res.json({success: false, message:"Missing Details"})
-
         }
         const user= await User.findOne({email});
         if(user){
@@ -25,11 +24,8 @@ export const signup = async(req,res)=>{
     }
     catch(error){
         res.json({
-            success:false ,  message: error.message
-        })
-
+            success:false ,  message: error.message})
     }
-
 }
 //Controller to login a user
 export const login = async (req,res)=>{
@@ -47,9 +43,8 @@ export const login = async (req,res)=>{
     catch(error){
         console.log(error.message);
         res.json({
-            success:false ,  message: error.message
+            success:false , message: error.message
         })
-
     }
 }
 //controller to check if user is authenticated
@@ -57,7 +52,7 @@ export const checkAuth = (req,res)=>{
     res.json({success:true, user:req.user});
 }
 
-//controller to update user profile details
+//controller to update user profile details  
 export const updateProfile = async (req,res) =>{
     try{
         const{profilePic , bio , fullName} = req.body;
@@ -75,6 +70,5 @@ export const updateProfile = async (req,res) =>{
     catch(error){
         console.log(error.message);
         res.json({success:false, message:error.message})
-
     }
 }

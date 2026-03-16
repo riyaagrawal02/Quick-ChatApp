@@ -4,7 +4,6 @@ import { formatMessageTime } from '../lib/utils'
 import { useContext } from 'react'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
-
 import toast from 'react-hot-toast'
 
 const ChatConatainer = () => {
@@ -22,7 +21,6 @@ const ChatConatainer = () => {
 
   }
 
-  
   const handleSendImage =async (e)=>{
     const file = e.target.files[0];
     if(!file || !file.type.startsWith("image/")){
@@ -73,13 +71,10 @@ const ChatConatainer = () => {
             <div className='text-center text-xs'>
               <img src={msg.senderId ===authUser._id ? authUser?.profilePic  || assets.avatar_icon : selectedUser?.profilePic || assets.avatar_icon } alt="" className='w-7 rounded-full' />
               <p className='text-gray-500' >{formatMessageTime( msg.createdAt)}</p>
-
             </div> 
-
           </div>
         ))}
         <div ref={scrollEnd}>
-
         </div>
       </div>
       {/*----bottom area------*/}
@@ -94,15 +89,12 @@ const ChatConatainer = () => {
           </label>
          </div>
          <img onClick={handleSendMessage} src={assets.send_button} alt="" className='w-7 cursor-pointer' />
-
       </div>
-
     </div>
   ):(
     <div className='flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden'>
       <img src={assets.logo_icon} className='max-w-16' alt=""/>
       <p className='text-lg font-medium text-white' >Chat anytime, anywhere</p>
-
     </div>
   )
 }

@@ -3,7 +3,6 @@ import User from "../models/user.models.js";
 import cloudinary from "../lib/cloudinary.js";
 import { io, userSocketMap } from "../server.js";
 
-
 //Get all users except the logged in user
 export const getUserForSidebar = async(req, res)=>{
     try{
@@ -22,7 +21,6 @@ export const getUserForSidebar = async(req, res)=>{
         res.json({success:true, users:filteredUsers, unseenMessages})
     }
     catch(error){
-
         console.log(error.message);
         res.json({success:false, message:error.message})
     }
@@ -31,7 +29,6 @@ export const getUserForSidebar = async(req, res)=>{
 //Get all messages for selected user
 export const getMessage= async(req,res)=>{
     try{
-
         const {id: selectedUserId} = req.params;
         const myId = req.user._id;
         const messages = await Message.find({
@@ -56,7 +53,6 @@ export const getMessage= async(req,res)=>{
     }
 }
 
-
 //api to mark message as seen using message id
 export const markMessageAsSeen = async (req,res)=>{
     try{
@@ -67,7 +63,6 @@ export const markMessageAsSeen = async (req,res)=>{
     catch(error){
         console.log(error.message);
         res.json({success:false, message:error.message})
-
     }
 }
 
@@ -94,9 +89,7 @@ export const sendMessage = async (req,res)=>{
         if (receiverSocketId){
             io.to(receiverSocketId).emit("newMessage", newMessage)
         }
-
         res.json({success:true, newMessage });
-
     }
     catch(error){
         console.log(error.message);

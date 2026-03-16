@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
     fullName:{
         type:String,
         required:true,
-       
     },
     password:{
         type:String,
@@ -23,7 +22,6 @@ const userSchema = new mongoose.Schema({
     bio:{
         type:String
     }
-
 }, {timestamps:true});
 
 const User = mongoose.model("User" , userSchema);
