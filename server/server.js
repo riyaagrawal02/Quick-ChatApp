@@ -13,7 +13,7 @@ const server = http.createServer(app)
 
 //Initialize socket.io server
 export const io = new Server(server,{
-    cors:{origin:"*"},
+    cors:{origin:"https://quickchat.riyaagrawal.dev"},
     
 });
 
