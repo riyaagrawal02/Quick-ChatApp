@@ -3,7 +3,6 @@ import User from "../models/user.models.js";
 import { generateToken } from "../lib/utils.js";
 import cloudinary from "../lib/cloudinary.js";
 
-//Signup a new user 
 export const signup = async(req,res)=>{
     const{fullName , email , password , bio } =req.body;
     try{
@@ -27,7 +26,7 @@ export const signup = async(req,res)=>{
             success:false ,  message: error.message})
     }
 }
-//Controller to login a user
+
 export const login = async (req,res)=>{
     try{
     const{email , password } =req.body;
@@ -47,12 +46,10 @@ export const login = async (req,res)=>{
         })
     }
 }
-//controller to check if user is authenticated
 export const checkAuth = (req,res)=>{
     res.json({success:true, user:req.user});
 }
 
-//controller to update user profile details  
 export const updateProfile = async (req,res) =>{
     try{
         const{profilePic , bio , fullName} = req.body;

@@ -3,13 +3,10 @@ import User from "../models/user.models.js";
 import cloudinary from "../lib/cloudinary.js";
 import { io, userSocketMap } from "../server.js";
 
-//Get all users except the logged in user
 export const getUserForSidebar = async(req, res)=>{
     try{
         const userId = req.user._id;
         const filteredUsers = await User.find({_id:{$ne: userId}}).select("-password");
-        
-        //count number of messages not seen
         const unseenMessages = {}
         const promises = filteredUsers.map(async (user)=>{
             const messages = await Message.find({senderId: user._id, receiverId: userId, seen:false});
@@ -26,7 +23,6 @@ export const getUserForSidebar = async(req, res)=>{
     }
 }
 
-//Get all messages for selected user
 export const getMessage= async(req,res)=>{
     try{
         const {id: selectedUserId} = req.params;
@@ -52,8 +48,6 @@ export const getMessage= async(req,res)=>{
         res.json({success:false, message:error.message})
     }
 }
-
-//api to mark message as seen using message id
 export const markMessageAsSeen = async (req,res)=>{
     try{
         const{ id } = req.params;
@@ -65,8 +59,6 @@ export const markMessageAsSeen = async (req,res)=>{
         res.json({success:false, message:error.message})
     }
 }
-
-//send message to selected user
 export const sendMessage = async (req,res)=>{
     try{
         const {text, image}=req.body;
@@ -84,7 +76,6 @@ export const sendMessage = async (req,res)=>{
             text,
             image:imageUrl
         })
-        //Emit the new message to the receiver's socket
         const receiverSocketId = userSocketMap[receiverId];
         if (receiverSocketId){
             io.to(receiverSocketId).emit("newMessage", newMessage)
