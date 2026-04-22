@@ -22,8 +22,6 @@ export const AuthProvider = ({children})=>{
                 connectSocket(data.user)
             }
         }
-
-
         catch(error){
             toast.error(error.message)  
         }
@@ -46,7 +44,6 @@ export const AuthProvider = ({children})=>{
             toast.error(error.message)
             
         }
-
     }
     
     const logout = async()=>{
@@ -108,5 +105,4 @@ export const AuthProvider = ({children})=>{
             {children}
         </AuthContext.Provider>
     )
-
 }

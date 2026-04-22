@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import assets, { messagesDummyData } from '../assets/assets'
+import assets from '../assets/assets'
 import { formatMessageTime } from '../lib/utils'
 import { useContext } from 'react'
 import { ChatContext } from '../../context/ChatContext'
@@ -49,17 +49,14 @@ const ChatConatainer = () => {
   
   return selectedUser? (
     <div className='h-full overflow-scroll relative backdrop-blur-lg' >
-      {/*------------header---------- */}
       <div className='flex items-center gap-3 py-3 mx-4 border-b border-stone-500' >
         <img src={selectedUser.profilePic || assets.avatar_icon} alt="" className='w-8 rounded-full'/>
         <p className='flex-1 text-lg text-white flex items-center gap-2' >{selectedUser.fullName}
           {onlineUsers.includes(selectedUser._id) && <span className='w-2 h-2 rounded-full bg-green-500'></span>}
-          
         </p>
         <img onClick={()=>setSelectedUser(null)} src={assets.arrow_icon} alt="" className='md:hidden max-w-7' />
         <img src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
       </div>
-      {/*---------chat area-------- */}
       <div className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
         {messages.map((msg, index)=>(
           <div key={index} className={`flex items-end gap-2 justify-end ${msg.senderId!== authUser._id && 'flex-row-reverse' }`}>
@@ -77,7 +74,6 @@ const ChatConatainer = () => {
         <div ref={scrollEnd}>
         </div>
       </div>
-      {/*----bottom area------*/}
       <div className='absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3'>
         <div className='flex-1 flex items-center bg-gray-100/12 px-3 rounded-full'>
           <input onChange={(e)=>
